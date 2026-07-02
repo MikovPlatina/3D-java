@@ -9,17 +9,20 @@
 Потом уже в цисле для отрисовки пиксилей:
 
   for (int y = 0; y < heidhWorld; y += 3) {
+  
       for (int x = 0; x < weidhWorld; x++) {
       
 мы нормализируем координаты экрана так чтобы серидина была 0 а края 1 и - 1:
 
 double normX = (2.0 * x / weidhWorld - 1.0) * aspRot;
+
 double normY = (2.0 * y / heidhWorld - 1.0);
 
 Потом уже с помощью fov в радианах (fovRad) и тангенсана мы вычисляем угол лучей в зависимости от
 растояния от ценра экрана:
 
 double angX = normX * Math.tan(fovRad / 2);
+
 double angY = normY * Math.tan(fovRad / 2);
 
 это нужно для перспективы и для этого мы еще нормализировали координаты экрана
@@ -27,12 +30,17 @@ double angY = normY * Math.tan(fovRad / 2);
 лучей:
 
 double dirX = angX;
+
 double dirY = angY;
+
 double dirZ = 1;
 
 double n = Math.sqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
+
 dirX /= n;
+
 dirY /= n;
+
 dirZ /= n;
 
 Дальше мы просто послойно двигаем лучи и проверяем не врезался ли он во что-то:
