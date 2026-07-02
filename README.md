@@ -44,7 +44,9 @@ dirY /= n;
 dirZ /= n;
 
 Дальше мы просто послойно двигаем лучи и проверяем не врезался ли он во что-то:
+
 double dis = 0;
+
 double hitX = 0, hitY = 0, hitZ = 0;
 
 while (dis < Zworld) {
@@ -58,9 +60,13 @@ while (dis < Zworld) {
     double dz = posZ - cricleZ;
 
     if (dx * dx + dy * dy + dz * dz < cricleShirina * cricleShirina || posY >= groundY)
+    
 Если он во чтото врезался(по формуле в шар или пол) то он из точки столкновеня пускает луч в сторону источника света (так же нормализируя направления):
+
 double dirLX = lightPosX - posX;
+
 double dirLY = lightPosY - posY;
+
 double dirLZ = lightPosZ - posZ;
 
 double no = Math.sqrt(dirLX * dirLX + dirLY * dirLY + dirLZ * dirLZ);
