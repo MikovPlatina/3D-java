@@ -7,7 +7,7 @@
 Сначала мы устанавливаем различные переменые одна из которых fov она в градусах, поэтому ее мы сразу переводим в радианы потому, что джава считает в них.
 Потом уже в цисле для отрисовки пиксилей:
   for (int y = 0; y < heidhWorld; y += 3) {
-                for (int x = 0; x < weidhWorld; x++) {
+      for (int x = 0; x < weidhWorld; x++) {
 мы нормализируем координаты экрана так чтобы серидина была 0 а края 1 и - 1:
 double normX = (2.0 * x / weidhWorld - 1.0) * aspRot;
 double normY = (2.0 * y / heidhWorld - 1.0);
@@ -53,4 +53,34 @@ if (no > 0) {
 
     double dist = 0.5;
     boolean shadow = false;
-И так же послойно проверяем есть
+И так же послойно проверяем есть ли на пути шар, если есть то останавливаем, если нет идем дальше: 
+ while (dist < no) {
+     double checkX = posX + dirLX * dist;
+     double checkY = posY + dirLY * dist;
+     double checkZ = posZ + dirLZ * dist;
+
+     double dLx = checkX - criclex;
+     double dLy = checkY - cricley;
+     double dLz = checkZ - cricleZ;
+
+
+     if (dLx * dLx + dLy * dLy + dLz * dLz < cricleShirina * cricleShirina) {
+         shadow = true;
+         break;
+         }
+
+     dist += 0.5;
+Ну и отрисовка в зависимости от растояния от источника освещения:
+if (!shadow) {
+
+    if (dist < lightRadiys) {
+        popal = 4;
+    } else if (dist < lightRadiys + lightImpuls) {
+          popal = 3;
+    } else if (dist < lightRadiys + lightImpuls + lightImpuls2) {
+          popal = 2;
+    }else {
+         popal = 1;
+    }
+}
+
